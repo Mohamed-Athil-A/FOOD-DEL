@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 //placing user order from frontend
 const placeorder = async (req, res) => {
   //frontend_url
-  const frontend_url = "http://localhost:5173";
+  const frontend_url = "http://localhost:5174";
   //creatting the new order
   try {
     const newOrder = new orderModel({
@@ -25,7 +25,7 @@ const placeorder = async (req, res) => {
     await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
     //create the stripe payment link
-    
+
     //First we have to create line items were we will insert the products data, currency, unit amount and quantity
 
     //whatever item we get from the user we are using that item we creating the line_items that are neccessary for the stripe items
@@ -76,11 +76,13 @@ const placeorder = async (req, res) => {
 
 //verify order api
 const verifyOrder = async (req, res) => {
-  //we are getting orderId from body
+  // Get orderId and success from req.body
   const { orderId, success } = req.body;
+
   try {
+    // Check if success is "true"
     if (success === "true") {
-      //if success is true then we are updating the order status to paid
+      // If success is true, update the order status to paid
       await orderModel.findByIdAndUpdate(orderId, {
         payment: true,
       });
@@ -88,14 +90,39 @@ const verifyOrder = async (req, res) => {
         success: true,
         message: "Paid",
       });
-    } else {
+    } else if (success === "false") {
+      // If success is false, delete the order
       await orderModel.findByIdAndDelete(orderId);
       res.json({
         success: false,
         message: "Not paid",
       });
+    } else {
+      // Handle the case where success is neither "true" nor "false"
+      res.json({
+        success: false,
+        message: "Invalid success value",
+      });
     }
   } catch (error) {
+    // Log and handle any errors
+    console.log(error);
+    res.json({
+      success: false,
+      message: "Error",
+    });
+  }
+};
+
+//users orders for frontend
+const userOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({ userId: req.body.userId });
+    res.json({
+      success: true,
+      data: orders,
+    });
+  } catch (err) {
     console.log(err);
     res.json({
       success: false,
@@ -104,4 +131,40 @@ const verifyOrder = async (req, res) => {
   }
 };
 
-export { placeorder, verifyOrder };
+//find all the orders for  admin
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({});
+    res.json({
+      success: true,
+      data: orders,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({
+      success: false,
+      message: "Error",
+    });
+  }
+};
+
+//api for updating order status
+const updateStatus = async (req, res) => {
+  try {
+    await orderModel.findByIdAndUpdate(req.body.orderId, {
+      status: req.body.status,
+    });
+    res.json({
+      success: true,
+      message: "Status Updated",
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: "Error",
+    });
+  }
+};
+
+export { placeorder, verifyOrder, userOrders, listOrders, updateStatus };

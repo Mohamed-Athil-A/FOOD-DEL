@@ -25,7 +25,7 @@ const Verify = () => {
       //if the payment is not successfull we redirect the user to the home page
       navigate("/");
     }
-    console.log(response);
+    // console.log(response);
   };
 
   useEffect(() => {

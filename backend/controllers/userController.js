@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
     const user = await userModel.findOne({ email: email });
 
     if (!user) {
-      res.status(400).json({
+      return res.json({
         success: false,
         message: "User doesn't exists",
       });
@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
     //checking the exists password and user given password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      res.status(400).json({
+      return res.json({
         success: false,
         message: "Invalid credentials",
       });
@@ -34,10 +34,11 @@ const loginUser = async (req, res) => {
     res.status(200).json({
       success: true,
       token,
+      message: "Login Successfully",
     });
   } catch (err) {
     console.log(err);
-    res.status(404).json({
+    res.json({
       success: false,
       message: "Error",
     });
@@ -60,7 +61,7 @@ const registerUser = async (req, res) => {
     //checking if user already exists
     const exists = await userModel.findOne({ email: email });
     if (exists) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "User already exists",
       });
@@ -68,7 +69,7 @@ const registerUser = async (req, res) => {
 
     //validating email format
     if (!validator.isEmail(email)) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         message: "Please enter a valid email",
       });
@@ -76,7 +77,7 @@ const registerUser = async (req, res) => {
 
     //cheking strong password
     if (password.length < 8) {
-      res.json({
+      return res.json({
         success: false,
         message: "Please enter a strong password",
       });
@@ -103,10 +104,11 @@ const registerUser = async (req, res) => {
     res.json({
       success: true,
       token,
+      message: "Registered Successfully",
     });
   } catch (err) {
     console.log(err);
-    res.status(404).json({
+    res.json({
       success: false,
       message: "Error",
     });

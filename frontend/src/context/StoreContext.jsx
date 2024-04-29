@@ -6,6 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   //passing the foodlist item
   const [food_list, setFoodList] = useState([]);
+  const [category, setCategory] = useState([]);
 
   //passing the cartItemss
   const [cartItems, setCartItems] = useState({});
@@ -54,10 +55,18 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+
+  //fetching catagory list
+  const fetchCategoryList = async () => {
+    const resposnse = await axios.post(`${url}/api/category/add`);
+    console.log(resposnse.data);
+    setCategory(resposnse.data.data);
+  };
+
   //fetch the FoodList from the database
   const fecthFoodList = async () => {
     const response = await axios.get(`${url}/api/food/list`);
-    console.log(response.data);
+    // console.log(response.data);
     setFoodList(response.data.data);
   };
   const loadCarData = async (token) => {

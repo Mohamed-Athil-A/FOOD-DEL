@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import "dotenv/config";
 import orderRouter from "./routes/orderRoute.js";
+import categoryRouter from "./routes/catagoryRoute.js";
 
 //app config
 const app = expres();
@@ -27,6 +28,7 @@ app.use("/images", expres.static("uploads"));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/category", categoryRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

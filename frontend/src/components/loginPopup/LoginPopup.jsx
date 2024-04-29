@@ -3,11 +3,12 @@ import "./loginPopup.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const LoginPopup = ({ setShowLogin }) => {
   const [currentState, setCurrentState] = useState("Login");
 
-  const { url, token, setToken } = useContext(StoreContext);
+  const { url, setToken } = useContext(StoreContext);
 
   const [data, setData] = useState({
     name: "",
@@ -31,12 +32,14 @@ const LoginPopup = ({ setShowLogin }) => {
     }
     const response = await axios.post(newurl, data);
     // console.log(response);
+
     if (response.data.success) {
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setShowLogin(false);
+      toast.success(response.data.message);
     } else {
-      alert(response.data.message);
+      toast.error(response.data.message);
     }
   };
 

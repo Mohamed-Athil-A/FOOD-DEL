@@ -7,7 +7,7 @@ import { StoreContext } from "../../context/StoreContext";
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
-  
+
   //useNavigate hook
   const navigate = useNavigate();
 
@@ -17,6 +17,8 @@ const Navbar = ({ setShowLogin }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    //Refresh the page
+    window.location.reload();
     navigate("/");
   };
 
@@ -69,7 +71,7 @@ const Navbar = ({ setShowLogin }) => {
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="profile-icon" />
             <ul className="nav-profile-dropdown">
-              <li>
+              <li onClick={() => navigate("/myorders")}>
                 <img src={assets.bag_icon} alt="bag-icon" />
                 <p>Orders</p>
               </li>

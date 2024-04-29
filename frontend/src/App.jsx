@@ -8,6 +8,8 @@ import Footer from "./components/Footer/Footer";
 import { useState } from "react";
 import LoginPopup from "./components/loginPopup/LoginPopup";
 import Verify from "./pages/Verify/Verify";
+import { Toaster } from "react-hot-toast";
+import MyOrders from "./pages/MyOrders/MyOrders";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -15,12 +17,14 @@ function App() {
     <>
       {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
       <div className="app">
+        <Toaster position="top-center" reverseOrder={false} />
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/myorders" element={<MyOrders />} />
         </Routes>
       </div>
       <Footer />
