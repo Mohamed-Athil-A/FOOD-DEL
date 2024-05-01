@@ -6,13 +6,16 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   //passing the foodlist item
   const [food_list, setFoodList] = useState([]);
-  const [category, setCategory] = useState([]);
+  // const [category, setCategory] = useState([]);
 
   //passing the cartItemss
   const [cartItems, setCartItems] = useState({});
+  // console.log(cartItems);
 
   //passing the token
   const [token, setToken] = useState("");
+  const [data, setData] = useState([]);
+  // console.log(data);
 
   //passing the url
   const url = "http://localhost:4000";
@@ -55,13 +58,14 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-
   //fetching catagory list
-  const fetchCategoryList = async () => {
-    const resposnse = await axios.post(`${url}/api/category/add`);
-    console.log(resposnse.data);
-    setCategory(resposnse.data.data);
-  };
+  // const fetchCategoryList = async () => {
+  //   const resposnse = await axios.post(`${url}/api/category/add`);
+  //   console.log(resposnse.data);
+  //   setCategory(resposnse.data.data);
+  // };
+
+  //fetching filtered food
 
   //fetch the FoodList from the database
   const fecthFoodList = async () => {
@@ -102,6 +106,8 @@ const StoreContextProvider = (props) => {
     token,
     setToken,
     food_list,
+    data,
+    setData,
   };
   return (
     <StoreContext.Provider value={contextValue}>

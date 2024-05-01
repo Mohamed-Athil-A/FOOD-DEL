@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addFood,
+  filterFood,
   getAllFood,
   removeFood,
 } from "../controllers/foodController.js";
@@ -37,5 +38,6 @@ const upload = multer({ storage, fileFilter });
 foodRouter.post("/add", upload.single("image"), addFood);
 foodRouter.get("/list", getAllFood);
 foodRouter.post("/remove", removeFood);
+foodRouter.get("/search", filterFood);
 
 export default foodRouter;

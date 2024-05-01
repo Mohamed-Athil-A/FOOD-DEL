@@ -1,4 +1,4 @@
-import expres from "express";
+import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
@@ -9,11 +9,11 @@ import orderRouter from "./routes/orderRoute.js";
 import categoryRouter from "./routes/catagoryRoute.js";
 
 //app config
-const app = expres();
+const app = express();
 const PORT = 4000;
 
 //middleware
-app.use(expres.json()); //whenever we get the req from frontend to backend we parse the data into JSON format and then we can use it
+app.use(express.json()); //whenever we get the req from frontend to backend we parse the data into JSON format and then we can use it
 
 app.use(cors()); //we can access the backend from any frontend
 
@@ -24,7 +24,7 @@ connectDB();
 app.use("/api/food", foodRouter);
 
 //showing the image to the client(frontend) from the server(backend) we need to create a static folder and then we need to create a route for it
-app.use("/images", expres.static("uploads"));
+app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
