@@ -10,7 +10,9 @@ import LoginPopup from "./components/loginPopup/LoginPopup";
 import Verify from "./pages/Verify/Verify";
 import { Toaster } from "react-hot-toast";
 import MyOrders from "./pages/MyOrders/MyOrders";
+import axios from "axios";
 
+axios.defaults
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   return (

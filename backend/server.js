@@ -15,7 +15,13 @@ const PORT = 4000;
 //middleware
 app.use(express.json()); //whenever we get the req from frontend to backend we parse the data into JSON format and then we can use it
 
-app.use(cors()); //we can access the backend from any frontend
+app.use(
+  cors({
+    origin: ["http://localhost:5173/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+); //we can access the backend from any frontend
 
 //DB connection
 connectDB();
