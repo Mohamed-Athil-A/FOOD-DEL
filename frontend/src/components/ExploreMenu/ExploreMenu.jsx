@@ -1,7 +1,13 @@
 import "./exploreMenu.css";
 import { menu_list } from "../../assets/assets";
+import Search from "../Search/Search";
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
 
 const ExploreMenu = ({ category, setCategory }) => {
+  const { searchItem, onChangeHandler, setCLick, click } =
+    useContext(StoreContext);
+
   return (
     <div className="explore-menu" id="explore-menu">
       <h1>Explore Our Menu</h1>
@@ -34,6 +40,13 @@ const ExploreMenu = ({ category, setCategory }) => {
         })}
       </div>
       <hr />
+      {click && (
+        <Search
+          searchItem={searchItem}
+          onChangeHandler={onChangeHandler}
+          setCLick={setCLick}
+        />
+      )}
     </div>
   );
 };

@@ -131,7 +131,7 @@ const userOrders = async (req, res) => {
   }
 };
 
-//find all the orders for  admin
+//find all the orders for admin
 const listOrders = async (req, res) => {
   try {
     const orders = await orderModel.find({});

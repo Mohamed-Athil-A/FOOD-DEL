@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-options">
-        <NavLink to={"/add"} className="sidebar-option">
+        <NavLink to={"/add"} className={"acitve" ? "sidebar-option" : "active"}>
           <img src={assets.add_icon} alt="add-icon" />
           <p>Add Item</p>
         </NavLink>

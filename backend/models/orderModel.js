@@ -20,6 +20,7 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "Food Processing",
+    enum: ["Food Processing", "Food Delivered", "Out For Delivery"], 
   },
   date: {
     type: Date,
@@ -27,7 +28,8 @@ const orderSchema = new mongoose.Schema({
   },
   payment: {
     type: Boolean,
-    default: false,
+    default: "Payment Pending",
+    enum: ["Payment Pending", "Payment Received", "Payment Cancelled"],
   },
 });
 

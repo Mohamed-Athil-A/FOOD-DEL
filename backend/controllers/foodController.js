@@ -55,6 +55,7 @@ const filterFood = async (req, res) => {
 
     // Search for any part of the food name that matches the search term
     const matchedFoods = await foodModel.find({
+      // name: regex,
       $or: [{ name: regex }, { category: regex }],
     });
 

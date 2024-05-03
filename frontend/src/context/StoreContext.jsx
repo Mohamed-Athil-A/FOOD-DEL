@@ -17,6 +17,14 @@ const StoreContextProvider = (props) => {
   const [data, setData] = useState([]);
   // console.log(data);
 
+  //search filter state
+  const [click, setCLick] = useState(false);
+  const [searchItem, setSearchItem] = useState("");
+
+  const onChangeHandler = (e) => {
+    setSearchItem(e.target.value);
+  };
+
   //passing the url
   const url = "http://localhost:4000";
 
@@ -108,6 +116,11 @@ const StoreContextProvider = (props) => {
     food_list,
     data,
     setData,
+    click,
+    setCLick,
+    searchItem,
+    setSearchItem,
+    onChangeHandler,
   };
   return (
     <StoreContext.Provider value={contextValue}>

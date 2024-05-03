@@ -4,18 +4,14 @@ import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
+import Search from "../Search/Search";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
-  const [click, setCLick] = useState(false);
-  const [searchItem, setSearchItem] = useState("");
+  const { getTotalCartAmount, token, setToken, click, setCLick, searchItem } =
+    useContext(StoreContext);
 
   const { url, setData } = useContext(StoreContext);
-
-  const onChangeHandler = (e) => {
-    setSearchItem(e.target.value);
-  };
 
   // console.log(searchItem);
   //useNavigate hook
@@ -39,9 +35,9 @@ const Navbar = ({ setShowLogin }) => {
     );
     setData(response.data.data);
   };
-  // useEffect(() => {
-  //   fetchingFilteredFood();
-  // }, [searchItem]);
+  useEffect(() => {
+    fetchingFilteredFood();
+  }, [searchItem]);
 
   return (
     <div className="navbar">
@@ -79,39 +75,24 @@ const Navbar = ({ setShowLogin }) => {
         </a>
       </ul>
       <div className="navbar-right">
-        {click && (
-          <>
-            <input
-              className="search"
-              type="text"
-              placeholder="Search your fav..."
-              value={searchItem}
-              onChange={onChangeHandler}
-            />
-
-            <img
-              src={assets.search_icon}
-              alt="search-icon"
-              className="filter"
-              onClick={() => {
-                setCLick((prev) => !prev);
-                setSearchItem("");
-                fetchingFilteredFood();
-              }}
-            />
-          </>
-        )}
-
-        <img
-          src={assets.search_icon}
-          alt="search-icon"
-          className={click ? "disabled" : "search_icon"}
-          onClick={() => setCLick((prev) => !prev)}
-        />
+        <a href="#search-filter">
+          <img
+            src={assets.search_icon}
+            alt="search-icon"
+            className="search-icon"
+            onClick={() => setCLick((prev) => !prev)}
+          />
+        </a>
 
         <div className="navbar-searchicon">
           <Link to={"/cart"}>
-            <img src={assets.basket_icon} alt="basket-icon" />
+            <img
+              src={assets.basket_icon}
+              alt="basket-icon"
+              onClick={() => {
+                setCLick(() => setCLick(false));
+              }}
+            />
           </Link>
           <div className={getTotalCartAmount() > 0 && "dot"}></div>
         </div>
@@ -123,7 +104,12 @@ const Navbar = ({ setShowLogin }) => {
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="profile-icon" />
             <ul className="nav-profile-dropdown">
-              <li onClick={() => navigate("/myorders")}>
+              <li
+                onClick={() => {
+                  navigate("/myorders");
+                  setCLick(false);
+                }}
+              >
                 <img src={assets.bag_icon} alt="bag-icon" />
                 <p>Orders</p>
               </li>
