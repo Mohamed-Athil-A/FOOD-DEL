@@ -26,7 +26,7 @@ const StoreContextProvider = (props) => {
   };
 
   //passing the url
-  const url = "http://localhost:4000";
+  const url = "https://food-del-sigma.vercel.app/";
 
   const addToCart = async (itemId) => {
     //if the user adding the item for the first time in the cart
