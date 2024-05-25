@@ -17,13 +17,7 @@ app.use(express.json()); //whenever we get the req from frontend to backend we p
 
 app.use(cors()); //we can access the backend from any frontend
 
-app.use(
-  cors({
-    origin: ["http://localhost:5173/"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-); //we can access the backend from any frontend
+app.use(cors()); //we can access the backend from any frontend
 
 //DB connection
 connectDB();
