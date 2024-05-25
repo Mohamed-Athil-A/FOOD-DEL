@@ -10,20 +10,12 @@ const StoreContextProvider = (props) => {
 
   //passing the cartItemss
   const [cartItems, setCartItems] = useState({});
-<<<<<<< HEAD
   console.log(cartItems);
-=======
-  // console.log(cartItems);
->>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
 
   //passing the token
   const [token, setToken] = useState("");
   const [data, setData] = useState([]);
-<<<<<<< HEAD
   console.log(data);
-=======
-  // console.log(data);
->>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
 
   //search filter state
   const [click, setCLick] = useState(false);
@@ -34,11 +26,7 @@ const StoreContextProvider = (props) => {
   };
 
   //passing the url
-<<<<<<< HEAD
   const url = "http://localhost:4000";
-=======
-  const url = "https://food-del-sigma.vercel.app/";
->>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
 
   const addToCart = async (itemId) => {
     //if the user adding the item for the first time in the cart
@@ -90,11 +78,7 @@ const StoreContextProvider = (props) => {
   //fetch the FoodList from the database
   const fecthFoodList = async () => {
     const response = await axios.get(`${url}/api/food/list`);
-<<<<<<< HEAD
     console.log(response.data);
-=======
-    // console.log(response.data);
->>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
     setFoodList(response.data.data);
   };
   const loadCarData = async (token) => {
@@ -120,10 +104,6 @@ const StoreContextProvider = (props) => {
   }, []);
 
   const contextValue = {
-<<<<<<< HEAD
-=======
-    food_list,
->>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
     cartItems,
     setCartItems,
     addToCart,
