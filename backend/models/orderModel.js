@@ -20,7 +20,11 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "Food Processing",
+<<<<<<< HEAD
     enum: ["Food Processing", "Food Delivered", "Out For Delivery"],
+=======
+    enum: ["Food Processing", "Food Delivered", "Out For Delivery"], 
+>>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
   },
   date: {
     type: Date,
@@ -28,7 +32,12 @@ const orderSchema = new mongoose.Schema({
   },
   payment: {
     type: Boolean,
+<<<<<<< HEAD
     default: false,
+=======
+    default: "Payment Pending",
+    enum: ["Payment Pending", "Payment Received", "Payment Cancelled"],
+>>>>>>> 7cf285bc7c0bb5f489173dba209c5c54030842bb
   },
 });
 
