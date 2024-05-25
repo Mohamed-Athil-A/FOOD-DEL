@@ -15,7 +15,13 @@ const PORT = 4000;
 //middleware
 app.use(express.json()); //whenever we get the req from frontend to backend we parse the data into JSON format and then we can use it
 
-app.use(cors()); //we can access the backend from any frontend
+app.use(
+  cors({
+    origin: "https://deploy-mern-1whq.vercel.app",
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+); //we can access the backend from any frontend
 
 app.use(cors()); //we can access the backend from any frontend
 
@@ -33,7 +39,7 @@ app.use("/api/order", orderRouter);
 app.use("/api/category", categoryRouter);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.json("Hello World");
 });
 
 app.listen(PORT, () => {
